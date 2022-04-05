@@ -10,6 +10,22 @@ class CounterScreen extends StatefulWidget {
 
 class _CounterScreenState extends State<CounterScreen> {
   int counter = 10;
+
+  void incrementar() {
+    counter++;
+    setState(() {});
+  }
+
+  void decrementar() {
+    counter--;
+    setState(() {});
+  }
+
+  void restablecer() {
+    counter = 0;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +40,7 @@ class _CounterScreenState extends State<CounterScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // Centra el objeto de acuerdo al widget de mayor tamaño
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const Text(
               'Numero de clicks',
@@ -37,14 +53,47 @@ class _CounterScreenState extends State<CounterScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: botonesFlotantes(
+        incrementarFn: incrementar,
+        decrementarFn: decrementar,
+        restablecerFn: restablecer,
+      ),
+    );
+  }
+}
+
+class botonesFlotantes extends StatelessWidget {
+  final Function incrementarFn;
+  final Function decrementarFn;
+  final Function restablecerFn;
+
+  const botonesFlotantes({
+    Key? key,
+    required this.incrementarFn,
+    required this.decrementarFn,
+    required this.restablecerFn,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        FloatingActionButton(
           child: const Icon(Icons.plus_one),
-          onPressed: () {
-            setState(() {
-              counter++;
-            });
-            print('Hola');
-          }),
+          backgroundColor: Colors.green,
+          onPressed: () => incrementarFn(),
+        ),
+        FloatingActionButton(
+          child: const Icon(Icons.exposure),
+          onPressed: () => restablecerFn(),
+        ),
+        FloatingActionButton(
+            child: const Icon(Icons.exposure_minus_1),
+            backgroundColor: Colors.red,
+            onPressed: () => decrementarFn())
+      ],
     );
   }
 }
