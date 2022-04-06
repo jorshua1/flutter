@@ -48,13 +48,13 @@ class _CounterScreenState extends State<CounterScreen> {
             ),
             Text(
               '$counter',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             )
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: botonesFlotantes(
+      floatingActionButton: BotonesFlotantes(
         incrementarFn: incrementar,
         decrementarFn: decrementar,
         restablecerFn: restablecer,
@@ -63,12 +63,12 @@ class _CounterScreenState extends State<CounterScreen> {
   }
 }
 
-class botonesFlotantes extends StatelessWidget {
+class BotonesFlotantes extends StatelessWidget {
   final Function incrementarFn;
   final Function decrementarFn;
   final Function restablecerFn;
 
-  const botonesFlotantes({
+  const BotonesFlotantes({
     Key? key,
     required this.incrementarFn,
     required this.decrementarFn,
